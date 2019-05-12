@@ -17,6 +17,11 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', upload.single('avatar'), async (req, res) => {
+    const startDistance = {};
+    const endDistance = {
+        latitude: 52.502931,
+        longitude: 13.408249
+    };
     let json;
     let fileName;
     const errors = {};
@@ -41,6 +46,15 @@ router.post('/', upload.single('avatar'), async (req, res) => {
         errors.missingProperties = 'File requires latitud and longitud fields writen as: lat and lng';
         res.send({ errors });
     } else {
+        // calculate distance to Ofice
+        try {
+            startDistance.latitude = json.lat;
+            startDistance.longitude = json.lng;
+            json.distanceToOfice = haversine(startDistance, endDistance);
+        } catch (error) {
+            errors.distance = 'unable to calculate distance';
+        }
+        // save to database
         try {
             const newLocation = new LocationModel({ name: fileName, file: json });
             const savedLocation = await newLocation.save();
