@@ -21,7 +21,7 @@ mongoose.set('debug', true);
 mongoose.Promise = Promise;
 
 mongoose.connect(
-    'mongodb://alejo:alejo123@ds155606.mlab.com:55606/locations-api',
+    process.env.MONGO_DB_URL,
     { useNewUrlParser: true }
 )
     .then(() => console.log('MongoDB Connected'))
