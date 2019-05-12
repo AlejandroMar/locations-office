@@ -35,7 +35,7 @@ name:
 
 ## Response
 
-You will get a response similar to this one:
+You should get a response similar to this one:
 
 ```json
   {
