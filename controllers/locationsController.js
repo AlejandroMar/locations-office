@@ -46,6 +46,7 @@ exports.postLocation = async (req, res) => {
         try {
             const newLocation = new LocationModel({ name: fileName, file: json });
             const savedLocation = await newLocation.save();
+
             res.json(savedLocation);
         } catch (error) {
             errors.DB = 'could not save to database';
