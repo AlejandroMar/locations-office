@@ -1,13 +1,10 @@
 const LocationModel = require('../models/LocationModel');
 const haversine = require('haversine');
+const officeLocation = require('../utils/officeLocation.json');
+const isEmpty = require('../utils/is-empty');
 
 
 exports.postLocation = async (req, res) => {
-    const startDistance = {};
-    const endDistance = {
-        latitude: 52.502931,
-        longitude: 13.408249
-    };
     let json;
     let fileName;
     const errors = {};
@@ -19,6 +16,11 @@ exports.postLocation = async (req, res) => {
     } catch (error) {
         errors.fileType = 'File type needs to be json';
         res.send({ errors });
+    }
+
+    if (isEmpty(json)) {
+        errors.emptyFile = 'Empty file, file requires latitude and longitude fields. Other fields are optional';
+        res.send(errors);
     }
 
     if (originalname.match(regex)) {
@@ -34,11 +36,11 @@ exports.postLocation = async (req, res) => {
     } else {
         // calculate distance to Ofice
         try {
-            startDistance.latitude = json.lat;
-            startDistance.longitude = json.lng;
-            json.distanceToOfice = haversine(startDistance, endDistance);
+            const startDistance = { latitude: json.lat, longitude: json.lng };
+            json.distanceToOfice = haversine(startDistance, officeLocation);
         } catch (error) {
             errors.distance = 'unable to calculate distance';
+            res.send(errors);
         }
         // save to database
         try {
@@ -47,6 +49,7 @@ exports.postLocation = async (req, res) => {
             res.json(savedLocation);
         } catch (error) {
             errors.DB = 'could not save to database';
+            res.send(errors);
         }
     }
 };
