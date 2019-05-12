@@ -34,15 +34,18 @@ Add query strings parameters for name or id field in the following form:
 You will get a response similar to this one:
 
 ```json
-    {
-    "lat": 4.5709,
-    "lng": 74.2973,
-    "capital": "Bogotá",
-    "country": "Colombia",
-    "language": "Spanish"
-  }
+  {
+    "_id": "5cd828ab14a53531011d72d4",
+    "name": "colombia",
+    "file": {
+        "lat": 4.5709,
+        "lng": 74.2973,
+        "capital": "bogotá",
+        "distanceToOffice": 7672.032312929571
+    },
+    "__v": 0
+  }   
 ```
-
 
 ### That's all!
 
