@@ -1,57 +1,31 @@
 const LocationModel = require('../models/LocationModel');
-const haversine = require('haversine');
-const officeLocation = require('../utils/officeLocation.json');
-const isEmpty = require('../utils/is-empty');
 
 
-exports.postLocation = async (req, res) => {
-    let json;
-    let fileName;
-    const errors = {};
-    const regex = /\.[json]+$/i;
-    const { file } = req;
-    const { buffer, originalname } = file;
+exports.getLocations = async (req, res) => {
+    const locationsList = await LocationModel.find();
+    res.json(locationsList);
+};
+
+exports.getLocationById = async (req, res) => {
     try {
-        json = JSON.parse(buffer);
+        const { id } = req.query;
+        console.log(id);
+
+        const location = await LocationModel.findById(id);
+        res.status(200).json(location);
     } catch (error) {
-        errors.fileType = 'File type needs to be json';
-        res.send({ errors });
+        res.status(404).json('Error: Location not found');
     }
+};
 
-    if (isEmpty(json)) {
-        errors.emptyFile = 'Empty file, file requires latitude and longitude fields. Other fields are optional';
-        res.send(errors);
-    }
-
-    if (originalname.match(regex)) {
-        fileName = originalname.replace(regex, '');
-    } else {
-        errors.fileType = 'File extension needs to be json';
-        res.send({ errors });
-    }
-
-    if (!json.lat || !json.lng) {
-        errors.missingProperties = 'File requires latitud and longitud fields writen as: lat and lng';
-        res.send({ errors });
-    } else {
-        // calculate distance to Ofice
-        try {
-            const startDistance = { latitude: json.lat, longitude: json.lng };
-            json.distanceToOfice = haversine(startDistance, officeLocation);
-        } catch (error) {
-            errors.distance = 'unable to calculate distance';
-            res.send(errors);
-        }
-        // save to database
-        try {
-            const newLocation = new LocationModel({ name: fileName, file: json });
-            const savedLocation = await newLocation.save();
-
-            res.json(savedLocation);
-        } catch (error) {
-            errors.DB = 'could not save to database';
-            res.send(errors);
-        }
+exports.getLocationByName = async (req, res) => {
+    try {
+        const { name } = req.query;
+        console.log(name);
+        const location = await LocationModel.findOne({ name });
+        res.json(location);
+    } catch (error) {
+        res.status(404).json('Error: Location not found');
     }
 };
 
