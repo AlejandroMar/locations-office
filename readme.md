@@ -20,18 +20,26 @@ In development:
 > [http<nolink>://localhost:4000/api/locations/](http://localhost:5000/api/locations/all)
 
 In production:
-> [http<nolink>://localhost:4000/api/locations/](http://localhost:5000/api/locations/all)
+> (https://fast-castle-21380.herokuapp.com/api/locations/all)
 
 ### Get one location 
 #### Request's params.
 Add urls parameters for name or id fielda in the following form:
 
-id:
-> http<nolink>://localhost:5000/api/locations/id<span style="color:red">5cd828ab14a53531011d72d4</span>
+#### id:
+In development
+> http<nolink>://localhost:5000/api/locations/id/<span style="color:red">5cd828ab14a53531011d72d4</span>
 
-name:
+In production:
+> https<nolink>://fast-castle-21380.herokuapp.com/api/locations/id/5cd828ab14a53531011d72d4
+#### name:
+
+In development:
 > http<nolink>://localhost:5000/api/locations/name/<span style="color:red">bogota</span>
 
+In production:
+
+> https<nolink>://fast-castle-21380.herokuapp.com/api/locations/name/london
 
 ## Response
 
