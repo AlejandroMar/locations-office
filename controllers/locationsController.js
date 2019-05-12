@@ -9,7 +9,6 @@ exports.getLocations = async (req, res) => {
 exports.getLocationById = async (req, res) => {
     try {
         const { id } = req.query;
-        console.log(id);
 
         const location = await LocationModel.findById(id);
         res.status(200).json(location);
@@ -21,7 +20,6 @@ exports.getLocationById = async (req, res) => {
 exports.getLocationByName = async (req, res) => {
     try {
         const { name } = req.query;
-        console.log(name);
         const location = await LocationModel.findOne({ name });
         res.json(location);
     } catch (error) {
