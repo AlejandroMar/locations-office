@@ -24,7 +24,7 @@ mongoose.connect(
     process.env.MONGO_DB_URL,
     { useNewUrlParser: true }
 )
-    .then(() => debug(chalk.magenta('MongoDB Connected')))
+    .then(() => debug(chalk.blue('MongoDB Connected')))
     .catch(err => debug(err));
 
 
