@@ -29,7 +29,7 @@ mongoose.connect(
 
 
 // Use routes
-app.use('/locations', locationsRoute);
+app.use('/api/locations', locationsRoute);
 
 
 const PORT = process.env.PORT || 4000;
