@@ -7,8 +7,9 @@ const locationsController = require('../controllers/locationsController');
 
 router.get('/all', locationsController.getLocations);
 
-router.get('/:id?', locationsController.getLocationById);
-router.get('/:name?', locationsController.getLocationByName);
+router.get('/id/:id', locationsController.getLocationById);
+
+router.get('/name/:name', locationsController.getLocationByName);
 
 
 module.exports = router;

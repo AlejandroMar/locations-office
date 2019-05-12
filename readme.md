@@ -23,10 +23,14 @@ In production:
 > [http<nolink>://localhost:4000/api/locations/](http://localhost:5000/api/locations/all)
 
 ### Get one location 
-#### Request's query strings params.
-Add query strings parameters for name or id field in the following form:
-> http://localhost:5000/api/locations/?id=5cd828ab14a53531011d72d4
-> http://localhost:5000/api/locations/?name=bogota
+#### Request's params.
+Add urls parameters for name or id fielda in the following form:
+
+id:
+> http<nolink>://localhost:5000/api/locations/id<span style="color:red">5cd828ab14a53531011d72d4</span>
+
+name:
+> http<nolink>://localhost:5000/api/locations/name/<span style="color:red">bogota</span>
 
 
 ## Response
