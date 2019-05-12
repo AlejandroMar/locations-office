@@ -3,7 +3,7 @@
 > npm install
 
 ## Data base URL
-create a .env file to store your data base's url like in the following example:
+Create a .env file to store your data base's url like in the following example:
 > MONGO_DB_URL=database-url
 
 ## Start the development server
