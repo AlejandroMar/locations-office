@@ -21,6 +21,9 @@ exports.getLocationByName = async (req, res) => {
     try {
         const { name } = req.params;
         const location = await LocationModel.findOne({ name });
+        if (location === null || location === undefined) {
+            throw new Error('Error: Location not found');
+        }
         res.json(location);
     } catch (error) {
         res.status(404).json('Error: Location not found');
