@@ -17,14 +17,14 @@ To get the list with all the locations, make a <span style="color:red; font-weig
 
 In development:
 
-> [http<nolink>://localhost:4000/api/locations/](http://localhost:5000/api/locations/all)
+> http<nolink>://localhost:5000/api/locations/all
 
 In production:
-> (https://fast-castle-21380.herokuapp.com/api/locations/all)
+> https<nolink>://fast-castle-21380.herokuapp.com/api/locations/all
 
 ### Get one location 
 #### Request's params.
-Add urls parameters for name or id fielda in the following form:
+Add urls parameters for name or id fields in the following form:
 
 #### id:
 In development
@@ -32,6 +32,7 @@ In development
 
 In production:
 > https<nolink>://fast-castle-21380.herokuapp.com/api/locations/id/5cd828ab14a53531011d72d4
+
 #### name:
 
 In development:
